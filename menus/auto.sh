@@ -41,32 +41,45 @@ while true; do
     
     if [ ! -z "$op" ]; then
         case $op in
-            1) echo "Escolha o nome de uma pasta"
-               read pasta
-               mkdir $pasta
-            ; 
-            echo "Pressione Enter para voltar ao menu..."; 
+            1) 
+		echo "Quantas pastas você quer criar?"
+		read numeroPastas;
+		for((cont = 0; cont<numeroPastas;cont++));
+			do
+				echo "Escolha o nome de uma pasta";
+				read pasta;
+				mkdir $pasta;
+			done
+            echo "Pastas criadas com sucesso!"; 
+	    read ;;
+            2) 
+            echo "Qual comando você quer criar um alas?"; 
+            read comando;
+	    alias apelido = comando;
+	    echo "Alias criado com sucesso!";
+	   read ;;
+            3) ps aux;
+            echo "Processos listados com sucesso!"; 
             read ;;
-            2) ps; 
-            echo "Pressione Enter para voltar ao menu..."; 
+            4)
+	    ps aux --sort=-%mem | head -n 11;
+            echo "Procesoss mais pesados listados"; 
             read ;;
-            3) ;
-            echo "Pressione Enter para voltar ao menu..."; 
+            5)
+	    ps -u $USER > log.txt;
+            echo "Arquivo criado com sucesso!"; 
             read ;;
-            4) ;
-            echo "Pressione Enter para voltar ao menu..."; 
-            read ;;
-            5) ;
-            echo "Pressione Enter para voltar ao menu..."; 
-            read ;;
-            6) ;
-            echo "Pressione Enter para voltar ao menu..."; 
+            6)
+            echo "Digite o PID do processo";
+	    read npid;
+	    kill -9 npid;
+	    echo "Processo matado com sucesso!";
             read ;;
             0) echo "Saindo..."; 
-            exit 0 
+            exit 0;
             ;;
             *) echo "Opção inválida!"; 
-            sleep 1 
+            sleep 1; 
             ;;
         esac
     fi
